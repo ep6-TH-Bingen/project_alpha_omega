@@ -13,6 +13,9 @@ We have to solve the [tasks](https://olat.vcrp.de/auth/RepositoryEntry/167680416
 For communication and code-sharing we use **_GitHub_** and **_Git_**.
 For Programming we use [Kotlin](https://kotlinlang.org/) and [Maven](https://maven.apache.org/).
 
-* Link to the [License](project_alpha_omega/licence.txt)
-* Link to the [Code of Conduct](project_alpha_omega/code_of_conduct.md)
- 
+- the language for coding should be English
+- for commenting the code you can use English or German
+- communication on Github should be German
+
+* Link to the [License](../licence.txt)
+* Link to the [Code of Conduct](../code_of_conduct.md)
