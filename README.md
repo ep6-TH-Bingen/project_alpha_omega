@@ -17,5 +17,5 @@ For Programming we use [Kotlin](https://kotlinlang.org/) and [Maven](https://mav
 - for commenting the code you can use English or German
 - communication on Github should be German
 
-* Link to the [License](../licence.txt)
-* Link to the [Code of Conduct](../code_of_conduct.md)
+* Link to the [License](https://github.com/ep6-TH-Bingen/project_alpha_omega/blob/master/licence.txt)
+* Link to the [Code of Conduct](https://github.com/ep6-TH-Bingen/project_alpha_omega/blob/master/code_of_conduct.md)
