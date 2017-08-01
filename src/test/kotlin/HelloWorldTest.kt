@@ -1,3 +1,10 @@
-/**
- * Created by Eden on 01.08.2017.
- */
+import org.junit.Test
+
+class HelloWorldTest {
+
+    @Test
+    fun printHello() {
+        println("Hello, World.")
+    }
+
+}
