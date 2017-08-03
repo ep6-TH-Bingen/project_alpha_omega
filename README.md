@@ -12,9 +12,10 @@ We have to solve the [tasks](https://olat.vcrp.de/auth/RepositoryEntry/167680416
 
 ## Application
 To start our application first you have to open command prompt or Windows PowerShell. Navigate to the directory the jar-file is in. There you can run the following command:
-'''
+
+```
 java -jar project_alpha_omega-1.0-SNAPSHOT-jar-with-dependencies.jar
-'''
+```
 
 ## Communication
 For communication and code-sharing we use **_GitHub_** and **_Git_**.
