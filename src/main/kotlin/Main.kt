@@ -1,18 +1,34 @@
-/*
+
 import com.univocity.parsers.csv.CsvParser
 import com.univocity.parsers.csv.CsvParserSettings
 import com.univocity.parsers.csv.CsvWriter
 import com.univocity.parsers.csv.CsvWriterSettings
 import java.io.*
 import java.util.*
-*/
+
 fun main(args: Array<String>) {
-    //readCsvInput()
-    scenario(10)
+    readCsvInput1()
+    readCsvInput2()
+    //scenario(10)
     //writeCsvOutput()
 }
-/*
- private fun readCsvInput() {
+
+fun readCsvInput1():MutableList<Int> {
+    val settings = CsvParserSettings()
+    settings.isHeaderExtractionEnabled = true
+    val parser = CsvParser(settings)
+    settings.format.setLineSeparator("\n")
+    val csvParser = CsvParser(settings)
+    val reader = FileAccess().getReader("/input.csv")
+    val allRows = csvParser.parseAllRecords(reader)
+    val car = Car()
+    var carNumber = car.inputCarNumberCSV
+    for (record in allRows){
+        carNumber.add(record.values.get(0).toInt())
+    }
+     return carNumber
+}
+    fun readCsvInput2():MutableList<Int> {
     val settings = CsvParserSettings()
     settings.isHeaderExtractionEnabled = true
     val parser = CsvParser(settings)
@@ -22,13 +38,11 @@ fun main(args: Array<String>) {
     val allRows = csvParser.parseAllRecords(reader)
 
     val car = Car()
+    var carInterestToDrive = car.inputInterestToDriveCSV
     for (record in allRows){
-        val carNumber = record.values.get(0).toInt()
-        val intestToDrive = record.values.get(1).toInt()
-        //TO DO: Zuweisung des "Interests to drive"
-
+        carInterestToDrive.add(record.values.get(1).toInt())
     }
-
+    return carInterestToDrive
 }
 private fun writeCsvOutput() {
         val settings = CsvWriterSettings()
@@ -65,4 +79,3 @@ class FileAccess {
     }
 
 }
-*/

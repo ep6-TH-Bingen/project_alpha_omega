@@ -2,6 +2,8 @@ import com.univocity.parsers.csv.CsvParser
 import com.univocity.parsers.csv.CsvParserSettings
 
 class Car() {
+    var inputCarNumberCSV : MutableList<Int> = mutableListOf()
+    var inputInterestToDriveCSV : MutableList<Int> = mutableListOf()
 
 
     fun interestOfDriving(numberOfCars: Int): MutableList<Int> {
@@ -29,14 +31,6 @@ class Car() {
                 println("I don't want to drive!")
             }
         }
-    }
-
-    fun addNewCar(numberOfCars: Int): MutableList<Int> {
-        var ListOfCars: MutableList<Int> = mutableListOf()
-        for (car in 1..numberOfCars) {
-            ListOfCars.add(car)
-        }
-        return ListOfCars
     }
 
 }
