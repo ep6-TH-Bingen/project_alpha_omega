@@ -9,7 +9,7 @@ import java.util.*
 fun main(args: Array<String>) {
     readCsvInput1()
     readCsvInput2()
-    //scenario(10)
+    scenario()
     //writeCsvOutput()
 }
 

@@ -1,6 +1,6 @@
-fun scenario(numberOfCars:Int) {
+fun scenario() {
     val car = Car()
-    val a = car.interestOfDriving(numberOfCars)
+    val a = readCsvInput2()
     println(a)
     println(car.announceDriving(a))
     val network = Network()
