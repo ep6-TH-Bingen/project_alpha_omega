@@ -14,11 +14,14 @@ class Network(val capacity : Int) {
         }
     }
 
-    fun analyzeNetwork() {
+    fun analyzeNetwork() : String {
         val overCapacity = this.overCapacity()
         for (car in this.listOfCarsDriving) {
             car.delayed = overCapacity
+            val isDelayed = car.delayed
+            return "$isDelayed"
         }
+        return ""
     }
     
 }
