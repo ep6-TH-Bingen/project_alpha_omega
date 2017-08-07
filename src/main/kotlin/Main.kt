@@ -15,17 +15,12 @@ fun main(args: Array<String>) {
 
         val csvParser = CsvParser(settings)
         val reader = FileAccess().getReader(fileName)
-        val customerRows: MutableList<Record> = csvParser.parseAllRecords(reader)
+        val carRows: MutableList<Record> = csvParser.parseAllRecords(reader)
 
-        for (record in customerRows) {
+        for (record in carRows) {
             val carID = record.values.get(0)
             val carStatus = record.values.get(1)
 
         }
-
-
-
-
-
 
 }
