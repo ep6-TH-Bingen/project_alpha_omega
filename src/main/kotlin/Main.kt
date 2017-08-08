@@ -1,4 +1,3 @@
-
 import com.univocity.parsers.common.record.Record
 import com.univocity.parsers.csv.CsvParser
 import com.univocity.parsers.csv.CsvParserSettings
@@ -28,7 +27,7 @@ fun main(args: Array<String>) {
     val car15 = cars.listOfCars.get(14)
 */
 
-        }
+}
 
 
 private fun readNetworkFromCsv(fileName: String): Network {
