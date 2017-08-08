@@ -57,9 +57,14 @@ private fun writeNetworkToCsv(network: Network, fileName: String) {
     csvWriter.writeRowsAndClose(carRows)
 }
 
-fun scenario(numberOfCars : Int, road : Network) {
-    val listOfCars = road.listOfCars
-    // create Cars
+fun scenario(numberOfCars : Int, capacity : Int) {
+    /*
+    * Creates a given a number of cars, every other car wants to drive
+    * A road network is created with the given capacity
+    * The road network is analyzed and it is printed whether a car is delayed or not
+    */
+    val listOfCars = ListOfCars()
+    val road = Network(capacity,listOfCars)
     for (i in 1..numberOfCars) {
         if (i % 2 == 0) {
             Car(i,true, listOfCars)
