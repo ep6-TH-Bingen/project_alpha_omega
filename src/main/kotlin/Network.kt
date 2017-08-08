@@ -1,4 +1,3 @@
-
 class Network(val capacity : Int) {
 
     val listOfCars : MutableList<Car> = mutableListOf()
