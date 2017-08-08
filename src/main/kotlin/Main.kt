@@ -50,7 +50,7 @@ private fun writeNetworkToCsv(network: Network, fileName: String) {
     for (car in network.listOfCars) {
         val id = car
         val status = car.wantsToDrive
-        val delayed = car.delayed
+        val delayed = car.isDelayed
         val row: Array<Any> = arrayOf(id, status, delayed)
         carRows.add(row)
     }
