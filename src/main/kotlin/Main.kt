@@ -5,7 +5,6 @@ import com.univocity.parsers.csv.CsvWriter
 import com.univocity.parsers.csv.CsvWriterSettings
 
 fun main(args: Array<String>) {
-
     val roadNetwork = readNetworkFromCsv("/cars.csv")
     roadNetwork.analyzeNetwork()
     writeNetworkToCsv(roadNetwork, "ResultingData.csv")
@@ -56,4 +55,21 @@ private fun writeNetworkToCsv(network: Network, fileName: String) {
     }
 
     csvWriter.writeRowsAndClose(carRows)
+}
+
+fun scenario(numberOfCars : Int, road : Network) {
+    val listOfCars = road.listOfCars
+    // create Cars
+    for (i in 1..numberOfCars) {
+        if (i % 2 == 0) {
+            Car(i,true, listOfCars)
+        } else {
+            Car(i,false, listOfCars)
+        }
+    }
+    road.analyzeNetwork()
+    for(car in road.listOfCarsDriving) {
+        println(car.isDelayed)
+    }
+
 }
