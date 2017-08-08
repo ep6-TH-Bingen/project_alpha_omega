@@ -1,4 +1,4 @@
-class Car(val wantsToDrive: Boolean, val roadNetwork : Network, var delayed : Boolean? = null) {
+class Car(val wantsToDrive: Boolean, val roadNetwork : Network, var delayed : Boolean = false) {
 
     // when a new car is initialized it is added to the listOfCars of the Network
     init {
