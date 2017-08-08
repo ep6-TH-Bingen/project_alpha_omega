@@ -74,7 +74,7 @@ fun scenario(numberOfCars : Int, capacity : Int) {
     }
     road.analyzeNetwork()
     for(car in road.listOfCarsDriving) {
-        println(car.isDelayed)
+        println("Is Car " + car.id + " delayed? " +car.isDelayed)
     }
 
 }
