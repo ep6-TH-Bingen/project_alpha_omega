@@ -20,9 +20,7 @@ private fun readNetworkFromCsv(fileName: String): Network {
     val reader = FileAccess().getReader(fileName)
     val carRows: MutableList<Record> = csvParser.parseAllRecords(reader)
 
-    val listOfCars : MutableList<Car> = mutableListOf()
-    val network = Network(capacity,listOfCars)
-
+    val listOfCars: MutableList<Car> = mutableListOf()
     for (car in carRows) {
         val carID = car.values.get(0)
         val id = carID.toInt()
@@ -30,10 +28,11 @@ private fun readNetworkFromCsv(fileName: String): Network {
         val carStatus = car.values.get(1)
         val status = carStatus.toBoolean()
 
-        val newCar = Car(id, status, network)
+        val newCar = Car(id, status)
+        listOfCars.add(newCar)
     }
 
-    return network
+    return Network(capacity, listOfCars)
 }
 
 private fun writeNetworkToCsv(network: Network, fileName: String) {
@@ -56,23 +55,24 @@ private fun writeNetworkToCsv(network: Network, fileName: String) {
     csvWriter.writeRowsAndClose(carRows)
 }
 
-fun scenario(numberOfCars : Int, capacity : Int) {
+fun scenario(numberOfCars: Int, capacity: Int) {
     /*
     * Creates a given a number of cars, every other car wants to drive
     * A road network is created with the given capacity
     * The road network is analyzed and it is printed whether a car is delayed or not
     */
-    val listOfCars : MutableList<Car> = mutableListOf()
-    val road = Network(capacity,listOfCars)
+    val listOfCars: MutableList<Car> = mutableListOf()
     for (i in 1..numberOfCars) {
-        val newCar = Car(i,i % 2 == 0, road)
+        val newCar = Car(i, i % 2 == 0)
         listOfCars.add(newCar)
     }
+
+    val road = Network(capacity, listOfCars)
     road.analyzeNetwork()
-    for(car in road.listOfCars){
+    for (car in road.listOfCars) {
         println("Does car #" + car.id + " want to drive? " + car.wantsToDrive)
         if (car.wantsToDrive == true) {
-            println("Is car #" + car.id + " delayed? " +car.isDelayed)
+            println("Is car #" + car.id + " delayed? " + car.isDelayed)
         }
     }
 }

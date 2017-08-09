@@ -1,5 +1,5 @@
-class Car(val id : Int, val wantsToDrive: Boolean, roadNetwork: Network) {
+class Car(val id: Int, val wantsToDrive: Boolean) {
 
-    var isDelayed : Boolean = false
+    var isDelayed: Boolean = false
 
 }

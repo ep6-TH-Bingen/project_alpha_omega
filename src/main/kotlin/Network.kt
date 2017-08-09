@@ -1,8 +1,8 @@
-class Network(val capacity : Int, val listOfCars: MutableList<Car>) {
+class Network(val capacity: Int, val listOfCars: MutableList<Car>) {
 
-    val listOfCarsDriving : MutableList<Car> = mutableListOf()
+    val listOfCarsDriving: MutableList<Car> = mutableListOf()
 
-    fun overCapacity() : Boolean {
+    fun overCapacity(): Boolean {
         // tallies up the number of cars on the road
         val numberOfCarsDriving = listOfCarsDriving.size
         // compares it to its own capacity
