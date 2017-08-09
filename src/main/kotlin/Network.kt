@@ -20,5 +20,5 @@ class Network(val capacity : Int) {
             car.delayed = overCapacity
         }
     }
-    
+
 }
