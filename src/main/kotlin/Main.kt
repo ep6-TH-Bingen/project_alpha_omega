@@ -7,23 +7,16 @@ import com.univocity.parsers.csv.CsvWriterSettings
 fun main(args: Array<String>) {
 
     val roadNetwork = readNetworkFromCsv("/cars.csv")
-
     roadNetwork.analyzeNetwork()
-
-    writeNetworkToCsv(roadNetwork,"Resulting Data")
-
-
+    writeNetworkToCsv(roadNetwork, "ResultingData.csv")
 }
-
 
 private fun readNetworkFromCsv(fileName: String): Network {
     //Changed the return "Car" into "Network", because there is the "listOfCars" ...?? is that the right way?
     val capacity = 20
-
     val settings = CsvParserSettings()
     settings.format.setLineSeparator("\n")
     settings.isHeaderExtractionEnabled = true
-
     val csvParser = CsvParser(settings)
     val reader = FileAccess().getReader(fileName)
     val carRows: MutableList<Record> = csvParser.parseAllRecords(reader)
@@ -40,8 +33,6 @@ private fun readNetworkFromCsv(fileName: String): Network {
         val status = carStatus.toBoolean()
 
         val newCar = Car(status, network)
-
-
     }
 
     return network
@@ -57,13 +48,10 @@ private fun writeNetworkToCsv(network: Network, fileName: String) {
 
     val carRows: MutableList<Array<Any>> = mutableListOf()
     for (car in network.listOfCars) {
-
-       val id = car
-
-
+        val id = car
         val status = car.wantsToDrive
         val delayed = car.delayed
-        val row: Array<Any> = arrayOf(id, status , delayed)
+        val row: Array<Any> = arrayOf(id, status, delayed)
         carRows.add(row)
     }
 
