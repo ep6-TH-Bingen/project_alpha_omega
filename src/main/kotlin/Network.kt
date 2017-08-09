@@ -1,4 +1,4 @@
-class Network(val capacity : Int, val listOfCars: ListOfCars) {
+class Network(val capacity : Int, val listOfCars: MutableList<Car>) {
 
     val listOfCarsDriving : MutableList<Car> = mutableListOf()
 
@@ -14,13 +14,13 @@ class Network(val capacity : Int, val listOfCars: ListOfCars) {
     }
 
     fun analyzeNetwork() {
-        for (car in listOfCars.listOfCars) {
+        for (car in this.listOfCars) {
             if (car.wantsToDrive == true) {
                 this.listOfCarsDriving.add(car)
             }
         }
         val overCapacity = this.overCapacity()
-        for (car in listOfCars.listOfCars) {
+        for (car in listOfCars) {
             car.isDelayed = overCapacity
         }
     }

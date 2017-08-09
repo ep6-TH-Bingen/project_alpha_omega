@@ -63,7 +63,7 @@ fun scenario(numberOfCars : Int, capacity : Int) {
     * A road network is created with the given capacity
     * The road network is analyzed and it is printed whether a car is delayed or not
     */
-    val listOfCars = ListOfCars()
+    val listOfCars : MutableList<Car> = mutableListOf()
     val road = Network(capacity,listOfCars)
     for (i in 1..numberOfCars) {
         if (i % 2 == 0) {
@@ -73,8 +73,12 @@ fun scenario(numberOfCars : Int, capacity : Int) {
         }
     }
     road.analyzeNetwork()
-    for(car in road.listOfCarsDriving) {
-        println("Is Car " + car.id + " delayed? " +car.isDelayed)
+    for(car in road.listOfCars){
+        println("Does car #" + car.id + " want to drive? " + car.wantsToDrive)
+        if (car.wantsToDrive == true) {
+            println("Is car #" + car.id + " delayed? " +car.isDelayed)
+        }
     }
+
 
 }
