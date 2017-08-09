@@ -6,9 +6,16 @@ import com.univocity.parsers.csv.CsvWriterSettings
 
 fun main(args: Array<String>) {
     val roadNetwork = readNetworkFromCsv("/cars.csv")
-    roadNetwork.analyzeNetwork()
-    writeNetworkToCsv(roadNetwork, "ResultingData.csv")
-}
+    var ListOfInterest:MutableList<Boolean> = mutableListOf()
+    for (car in roadNetwork.listOfCars) {
+        ListOfInterest.add(car.wantsToDrive)
+    }
+        roadNetwork.analyzeNetwork()
+        var numberOfCarsInComparisonToCapacity = roadNetwork.CarsDevidedByCapacity()
+        var chanceOfDelay = roadNetwork.switchCase(numberOfCarsInComparisonToCapacity)
+        val ListOfCarsAfterDelayHasBeenApplied = revertBackToBoolean(roadNetwork.applyingDelay(ListOfInterestInteger(ListOfInterest),chanceOfDelay))
+        writeNetworkToCsv(roadNetwork, "ResultingData.csv")
+    }
 
 private fun readNetworkFromCsv(fileName: String): Network {
     //Changed the return "Car" into "Network", because there is the "listOfCars"
@@ -47,7 +54,9 @@ private fun writeNetworkToCsv(network: Network, fileName: String) {
     for (car in network.listOfCars) {
         val id = car.id
         val status = car.wantsToDrive
+        //This needs to be changed so that the actual delay gets written into the output file and not the default Boolean from the Car class
         val delayed = car.isDelayed
+        //This needs to be changed so that the actual delay gets written into the output file and not the default Boolean from the Car class
         val row: Array<Any> = arrayOf(id, status, delayed)
         carRows.add(row)
     }
@@ -75,4 +84,33 @@ fun scenario(numberOfCars: Int, capacity: Int) {
             println("Is car #" + car.id + " delayed? " + car.isDelayed)
         }
     }
+}
+fun ListOfInterestInteger(ListOfInterest:MutableList<Boolean>):MutableList<Int>{
+    var ListOfCarInterestToDriveInteger:MutableList<Int> = mutableListOf()
+    var carInterestToDrive : Int = 0
+    for (car in ListOfInterest){
+        if (car==true){
+            carInterestToDrive = 1
+        }
+        if (car==false){
+            carInterestToDrive = 0
+        }
+        ListOfCarInterestToDriveInteger.add(carInterestToDrive)
+    }
+    return ListOfCarInterestToDriveInteger
+}
+
+fun revertBackToBoolean(ListOfCarsAfterDelay:MutableList<Int>):MutableList<Boolean>{
+    var ListOfCarsAfterDelayBoolean: MutableList<Boolean> = mutableListOf()
+    var trueOrFalse:Boolean = true
+    for (car in ListOfCarsAfterDelay){
+        if (car==1){
+            trueOrFalse = true
+        }
+        if (car==0){
+            trueOrFalse = false
+        }
+        ListOfCarsAfterDelayBoolean.add(trueOrFalse)
+    }
+    return ListOfCarsAfterDelayBoolean
 }
