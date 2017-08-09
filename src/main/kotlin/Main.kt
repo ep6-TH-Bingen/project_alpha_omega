@@ -11,7 +11,7 @@ fun main(args: Array<String>) {
 }
 
 private fun readNetworkFromCsv(fileName: String): Network {
-    //Changed the return "Car" into "Network", because there is the "listOfCars" ...?? is that the right way?
+    //Changed the return "Car" into "Network", because there is the "listOfCars"
     val capacity = 20
     val settings = CsvParserSettings()
     settings.format.setLineSeparator("\n")
@@ -20,9 +20,8 @@ private fun readNetworkFromCsv(fileName: String): Network {
     val reader = FileAccess().getReader(fileName)
     val carRows: MutableList<Record> = csvParser.parseAllRecords(reader)
 
-    // same here with "Network()"
-    // The closing bracket after "Network" is still underlined...
-    val network = Network(capacity)
+    val listOfCars : MutableList<Car> = mutableListOf()
+    val network = Network(capacity,listOfCars)
 
     for (car in carRows) {
         val carID = car.values.get(0)
@@ -31,7 +30,7 @@ private fun readNetworkFromCsv(fileName: String): Network {
         val carStatus = car.values.get(1)
         val status = carStatus.toBoolean()
 
-        val newCar = Car(status, network)
+        val newCar = Car(id, status, network)
     }
 
     return network
@@ -47,7 +46,7 @@ private fun writeNetworkToCsv(network: Network, fileName: String) {
 
     val carRows: MutableList<Array<Any>> = mutableListOf()
     for (car in network.listOfCars) {
-        val id = car
+        val id = car.id
         val status = car.wantsToDrive
         val delayed = car.isDelayed
         val row: Array<Any> = arrayOf(id, status, delayed)
@@ -66,11 +65,8 @@ fun scenario(numberOfCars : Int, capacity : Int) {
     val listOfCars : MutableList<Car> = mutableListOf()
     val road = Network(capacity,listOfCars)
     for (i in 1..numberOfCars) {
-        if (i % 2 == 0) {
-            Car(i,true, listOfCars)
-        } else {
-            Car(i,false, listOfCars)
-        }
+        val newCar = Car(i,i % 2 == 0, road)
+        listOfCars.add(newCar)
     }
     road.analyzeNetwork()
     for(car in road.listOfCars){
@@ -79,6 +75,4 @@ fun scenario(numberOfCars : Int, capacity : Int) {
             println("Is car #" + car.id + " delayed? " +car.isDelayed)
         }
     }
-
-
 }
