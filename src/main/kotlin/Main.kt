@@ -12,7 +12,6 @@ fun main(args: Array<String>) {
 }
 
 private fun readNetworkFromCsv(fileName: String): Network {
-    //Changed the return "Car" into "Network", because there is the "listOfCars" ...?? is that the right way?
     val capacity = 20
     val settings = CsvParserSettings()
     settings.format.setLineSeparator("\n")
@@ -20,9 +19,6 @@ private fun readNetworkFromCsv(fileName: String): Network {
     val csvParser = CsvParser(settings)
     val reader = FileAccess().getReader(fileName)
     val carRows: MutableList<Record> = csvParser.parseAllRecords(reader)
-
-    // same here with "Network()"
-    // The closing bracket after "Network" is still underlined...
     val network = Network(capacity)
 
     for (car in carRows) {
@@ -32,7 +28,7 @@ private fun readNetworkFromCsv(fileName: String): Network {
         val carStatus = car.values.get(1)
         val status = carStatus.toBoolean()
 
-        val newCar = Car(status, network)
+        val newCar = Car(id, status, network)
     }
 
     return network
