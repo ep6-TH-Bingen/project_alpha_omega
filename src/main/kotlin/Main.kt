@@ -51,12 +51,15 @@ private fun writeNetworkToCsv(network: Network,listOfCarsAfterDelayHasBeenApplie
     csvWriter.writeHeaders("Car-ID", "status", "delayed")
 
     val carRows: MutableList<Array<Any>> = mutableListOf()
+    var delayed = false
+    var i = 0
     for (car in network.listOfCars) {
         val id = car.id
         val status = car.wantsToDrive
-        //This needs to be changed so that the actual delay gets written into the output file and not the default Boolean from the Car class
-        var delayed = car.isDelayed
-        //This needs to be changed so that the actual delay gets written into the output file and not the default Boolean from the Car class
+        if (i<=listOfCarsAfterDelayHasBeenApplied.size) {
+            delayed = listOfCarsAfterDelayHasBeenApplied.get(i)
+        }
+        i += 1
         val row: Array<Any> = arrayOf(id, status, delayed)
         carRows.add(row)
     }
