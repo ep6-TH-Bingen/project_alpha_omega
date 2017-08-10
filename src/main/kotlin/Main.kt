@@ -6,20 +6,13 @@ import com.univocity.parsers.csv.CsvWriterSettings
 
 fun main(args: Array<String>) {
     val roadNetwork = readNetworkFromCsv("/cars.csv")
-    var listOfInterest:MutableList<Boolean> = mutableListOf()
-    for (car in roadNetwork.listOfCars) {
-        listOfInterest.add(car.wantsToDrive)
-    }
-        roadNetwork.analyzeNetwork()
-    var numberOfCarsInComparisonToCapacity = roadNetwork.carsDividedByCapacity()
-    var chanceOfDelay = roadNetwork.switchCase(numberOfCarsInComparisonToCapacity)
-    val listOfCarsAfterDelayHasBeenApplied = roadNetwork.applyingDelay(listOfInterest,chanceOfDelay)
-        writeNetworkToCsv(roadNetwork,listOfCarsAfterDelayHasBeenApplied, "ResultingData.csv")
-    }
+    roadNetwork.analyzeNetwork()
+    writeNetworkToCsv(roadNetwork, "ResultingData.csv")
+}
 
 private fun readNetworkFromCsv(fileName: String): Network {
     //Changed the return "Car" into "Network", because there is the "listOfCars"
-    val capacity = 20
+    val capacity = 5
     val settings = CsvParserSettings()
     settings.format.setLineSeparator("\n")
     settings.isHeaderExtractionEnabled = true
@@ -42,7 +35,7 @@ private fun readNetworkFromCsv(fileName: String): Network {
     return Network(capacity, listOfCars)
 }
 
-private fun writeNetworkToCsv(network: Network,listOfCarsAfterDelayHasBeenApplied:MutableList<Boolean>, fileName: String) {
+private fun writeNetworkToCsv(network: Network, fileName: String) {
     val settings = CsvWriterSettings()
     settings.format.setLineSeparator("\n")
 
@@ -51,15 +44,10 @@ private fun writeNetworkToCsv(network: Network,listOfCarsAfterDelayHasBeenApplie
     csvWriter.writeHeaders("Car-ID", "status", "delayed")
 
     val carRows: MutableList<Array<Any>> = mutableListOf()
-    var delayed = false
-    var i = 0
     for (car in network.listOfCars) {
         val id = car.id
         val status = car.wantsToDrive
-        if (i<=listOfCarsAfterDelayHasBeenApplied.size) {
-            delayed = listOfCarsAfterDelayHasBeenApplied.get(i)
-        }
-        i += 1
+        val delayed = car.isDelayed
         val row: Array<Any> = arrayOf(id, status, delayed)
         carRows.add(row)
     }

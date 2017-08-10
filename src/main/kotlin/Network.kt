@@ -1,35 +1,30 @@
 class Network(val capacity: Int, val listOfCars: MutableList<Car>) {
 
-    val listOfCarsDriving: MutableList<Car> = mutableListOf()
-
-    fun overCapacity(): Boolean {
-        // tallies up the number of cars on the road
-        val numberOfCarsDriving = listOfCarsDriving.size
-        // compares it to its own capacity
-        if (this.capacity >= numberOfCarsDriving) {
-            return false
-        } else {
-            return true
+    fun requiredCapacity(): Int {
+        var requiredCapacity = 0
+        for (car in this.listOfCars) {
+            if (car.wantsToDrive) {
+                requiredCapacity += 1
+            }
         }
+        return requiredCapacity
     }
 
     fun analyzeNetwork() {
-        for (car in this.listOfCars) {
-            if (car.wantsToDrive == true) {
-                this.listOfCarsDriving.add(car)
+        val requiredCapacity = this.requiredCapacity()
+        val carsDividedByCapacity = requiredCapacity / capacity.toDouble()
+        val chanceOfDelay = chanceOfDelay(carsDividedByCapacity)
+
+        for (car in listOfCars) {
+            if (car.wantsToDrive) {
+                val delayed = computingDelay(chanceOfDelay)
+                car.isDelayed = delayed
             }
         }
-        val overCapacity = this.overCapacity()
-        for (car in listOfCars) {
-            car.isDelayed = overCapacity
-        }
     }
-    fun carsDividedByCapacity():Double{
-        val carsDividedByCapacity = (listOfCars.size / capacity).toDouble()
-        return carsDividedByCapacity
-    }
-    fun switchCase(carsDividedByCapacity:Double):Double {
-        var chanceOfDelay :Double = 0.0
+
+    fun chanceOfDelay(carsDividedByCapacity: Double): Double {
+        var chanceOfDelay: Double = 0.0
         if (carsDividedByCapacity > 1.5) {
             chanceOfDelay = 0.9
         }
@@ -53,21 +48,10 @@ class Network(val capacity: Int, val listOfCars: MutableList<Car>) {
         }
         return chanceOfDelay
     }
-    fun applyingDelay(ListOfInterest:MutableList<Boolean>,chanceOfDelay:Double):MutableList<Boolean>{
-        var ListOfCarsAfterDelay:MutableList<Boolean> = mutableListOf()
-        for (car in ListOfInterest){
-            if (car==true) {
-                val RandomNumber = Math.random()
-                var value = false
-                if (chanceOfDelay > RandomNumber) {
-                    value = true
-                }
-                ListOfCarsAfterDelay.add(value)
-            }
-            if (car==false){
-                ListOfCarsAfterDelay.add(false)
-            }
-        }
-        return ListOfCarsAfterDelay
+
+    fun computingDelay(chanceOfDelay: Double): Boolean {
+        val randomNumber = Math.random()
+        return chanceOfDelay > randomNumber
     }
+
 }
