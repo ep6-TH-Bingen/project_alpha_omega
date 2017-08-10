@@ -24,5 +24,50 @@ class Network(val capacity: Int, val listOfCars: MutableList<Car>) {
             car.isDelayed = overCapacity
         }
     }
-
+    fun carsDividedByCapacity():Double{
+        val carsDividedByCapacity = (listOfCars.size / capacity).toDouble()
+        return carsDividedByCapacity
+    }
+    fun switchCase(carsDividedByCapacity:Double):Double {
+        var chanceOfDelay :Double = 0.0
+        if (carsDividedByCapacity > 1.5) {
+            chanceOfDelay = 0.9
+        }
+        if ((1.25 <= carsDividedByCapacity) && (carsDividedByCapacity <= 1.5)) {
+            chanceOfDelay = 0.7
+        }
+        if ((1.1 <= carsDividedByCapacity) && (carsDividedByCapacity <= 1.25)) {
+            chanceOfDelay = 0.5
+        }
+        if ((0.9 <= carsDividedByCapacity) && (carsDividedByCapacity <= 1.1)) {
+            chanceOfDelay = 0.3
+        }
+        if ((0.7 <= carsDividedByCapacity) && (carsDividedByCapacity <= 0.9)) {
+            chanceOfDelay = 0.2
+        }
+        if ((0.5 <= carsDividedByCapacity) && (carsDividedByCapacity <= 0.7)) {
+            chanceOfDelay = 0.1
+        }
+        if (carsDividedByCapacity < 0.5) {
+            chanceOfDelay = 0.05
+        }
+        return chanceOfDelay
+    }
+    fun applyingDelay(ListOfInterest:MutableList<Boolean>,chanceOfDelay:Double):MutableList<Boolean>{
+        var ListOfCarsAfterDelay:MutableList<Boolean> = mutableListOf()
+        for (car in ListOfInterest){
+            if (car==true) {
+                val RandomNumber = Math.random()
+                var value = false
+                if (chanceOfDelay > RandomNumber) {
+                    value = true
+                }
+                ListOfCarsAfterDelay.add(value)
+            }
+            if (car==false){
+                ListOfCarsAfterDelay.add(false)
+            }
+        }
+        return ListOfCarsAfterDelay
+    }
 }
