@@ -11,7 +11,6 @@ fun main(args: Array<String>) {
 }
 
 private fun readNetworkFromCsv(fileName: String): Network {
-    //Changed the return "Car" into "Network", because there is the "listOfCars"
     val capacity = 5
     val settings = CsvParserSettings()
     settings.format.setLineSeparator("\n")
@@ -25,10 +24,10 @@ private fun readNetworkFromCsv(fileName: String): Network {
         val carID = car.values.get(0)
         val id = carID.toInt()
 
-        val carStatus = car.values.get(1)
-        val status = carStatus.toBoolean()
-
-        val newCar = Car(id, status)
+        val carWantsToDriveAtHour = car.values.get(1)
+        val wannaDriveAt = carWantsToDriveAtHour.toInt()
+        // "wannaDriveAt" is Type Int...probably we have to change in class "Car" Type Boolean to Int ???
+        val newCar = Car(id, wannaDriveAt)
         listOfCars.add(newCar)
     }
 
@@ -41,7 +40,7 @@ private fun writeNetworkToCsv(network: Network, fileName: String) {
 
     val writer = FileAccess().getWriter(fileName)
     val csvWriter = CsvWriter(writer, settings)
-    csvWriter.writeHeaders("Car-ID", "status", "delayed")
+    csvWriter.writeHeaders("Car-ID", "wantsToDriveAtHour", "delayed")
 
     val carRows: MutableList<Array<Any>> = mutableListOf()
     for (car in network.listOfCars) {
