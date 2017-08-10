@@ -58,9 +58,9 @@ class Network(val capacity: Int, val listOfCars: MutableList<Car>) {
         for (car in ListOfInterest){
             if (car==true) {
                 val RandomNumber = Math.random()
-                var value = true
+                var value = false
                 if (chanceOfDelay > RandomNumber) {
-                    value = false
+                    value = true
                 }
                 ListOfCarsAfterDelay.add(value)
             }
