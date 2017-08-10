@@ -12,7 +12,7 @@ fun main(args: Array<String>) {
 
 private fun readNetworkFromCsv(fileName: String): Network {
     //Changed the return "Car" into "Network", because there is the "listOfCars"
-    val capacity = 20
+    val capacity = 5
     val settings = CsvParserSettings()
     settings.format.setLineSeparator("\n")
     settings.isHeaderExtractionEnabled = true
