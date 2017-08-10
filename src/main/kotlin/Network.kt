@@ -25,47 +25,47 @@ class Network(val capacity: Int, val listOfCars: MutableList<Car>) {
         }
     }
     fun CarsDevidedByCapacity():Double{
-        val x = (listOfCars.size / capacity).toDouble()
-        return x
+        val CarsDevidedByCapacity = (listOfCars.size / capacity).toDouble()
+        return CarsDevidedByCapacity
     }
-fun switchCase(x:Double):Double {
-    var y :Double = 0.0
-    if (x > 1.5) {
-        y = 0.9
+    fun switchCase(CarsDevidedByCapacity:Double):Double {
+        var chanceOfDelay :Double = 0.0
+        if (CarsDevidedByCapacity > 1.5) {
+            chanceOfDelay = 0.9
+        }
+        if ((1.25 <= CarsDevidedByCapacity) && (CarsDevidedByCapacity <= 1.5)) {
+            chanceOfDelay = 0.7
+        }
+        if ((1.1 <= CarsDevidedByCapacity) && (CarsDevidedByCapacity <= 1.25)) {
+            chanceOfDelay = 0.5
+        }
+        if ((0.9 <= CarsDevidedByCapacity) && (CarsDevidedByCapacity <= 1.1)) {
+            chanceOfDelay = 0.3
+        }
+        if ((0.7 <= CarsDevidedByCapacity) && (CarsDevidedByCapacity <= 0.9)) {
+            chanceOfDelay = 0.2
+        }
+        if ((0.5 <= CarsDevidedByCapacity) && (CarsDevidedByCapacity <= 0.7)) {
+            chanceOfDelay = 0.1
+        }
+        if (CarsDevidedByCapacity < 0.5) {
+            chanceOfDelay = 0.05
+        }
+        return chanceOfDelay
     }
-    if ((1.25 <= x) && (x <= 1.5)) {
-        y = 0.7
-    }
-    if ((1.1 <= x) && (x <= 1.25)) {
-        y = 0.5
-    }
-    if ((0.9 <= x) && (x <= 1.1)) {
-        y = 0.3
-    }
-    if ((0.7 <= x) && (x <= 0.9)) {
-        y = 0.2
-    }
-    if ((0.5 <= x) && (x <= 0.7)) {
-        y = 0.1
-    }
-    if (x < 0.5) {
-        y = 0.05
-    }
-    return y
-}
-    fun applyingDelay(ListOfCarsInterestToDriveInteger:MutableList<Int>,y:Double):MutableList<Int>{
-        var ListOfCarsAfterDelay:MutableList<Int> = mutableListOf()
-        for (car in ListOfCarsInterestToDriveInteger){
-            if (car==1) {
-                val z = Math.random()
-                var value = 1
-                if (y > z) {
-                    value = 0
+    fun applyingDelay(ListOfInterest:MutableList<Boolean>,chanceOfDelay:Double):MutableList<Boolean>{
+        var ListOfCarsAfterDelay:MutableList<Boolean> = mutableListOf()
+        for (car in ListOfInterest){
+            if (car==true) {
+                val RandomNumber = Math.random()
+                var value = true
+                if (chanceOfDelay > RandomNumber) {
+                    value = false
                 }
-                ListOfCarsAfterDelay.add(ListOfCarsInterestToDriveInteger.get(car) * value)
+                ListOfCarsAfterDelay.add(value)
             }
-            if (car==0){
-                ListOfCarsAfterDelay.add(ListOfCarsInterestToDriveInteger.get(car) * 0)
+            if (car==false){
+                ListOfCarsAfterDelay.add(false)
             }
         }
         return ListOfCarsAfterDelay
