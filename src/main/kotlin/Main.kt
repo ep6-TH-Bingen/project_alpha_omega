@@ -6,9 +6,16 @@ import com.univocity.parsers.csv.CsvWriterSettings
 
 fun main(args: Array<String>) {
     val roadNetwork = readNetworkFromCsv("/cars.csv")
-    roadNetwork.analyzeNetwork()
-    writeNetworkToCsv(roadNetwork, "ResultingData.csv")
-}
+    var listOfInterest:MutableList<Boolean> = mutableListOf()
+    for (car in roadNetwork.listOfCars) {
+        listOfInterest.add(car.wantsToDrive)
+    }
+        roadNetwork.analyzeNetwork()
+    var numberOfCarsInComparisonToCapacity = roadNetwork.carsDividedByCapacity()
+    var chanceOfDelay = roadNetwork.switchCase(numberOfCarsInComparisonToCapacity)
+    val listOfCarsAfterDelayHasBeenApplied = roadNetwork.applyingDelay(listOfInterest,chanceOfDelay)
+        writeNetworkToCsv(roadNetwork,listOfCarsAfterDelayHasBeenApplied, "ResultingData.csv")
+    }
 
 private fun readNetworkFromCsv(fileName: String): Network {
     //Changed the return "Car" into "Network", because there is the "listOfCars"
@@ -35,7 +42,7 @@ private fun readNetworkFromCsv(fileName: String): Network {
     return Network(capacity, listOfCars)
 }
 
-private fun writeNetworkToCsv(network: Network, fileName: String) {
+private fun writeNetworkToCsv(network: Network,listOfCarsAfterDelayHasBeenApplied:MutableList<Boolean>, fileName: String) {
     val settings = CsvWriterSettings()
     settings.format.setLineSeparator("\n")
 
@@ -44,10 +51,15 @@ private fun writeNetworkToCsv(network: Network, fileName: String) {
     csvWriter.writeHeaders("Car-ID", "status", "delayed")
 
     val carRows: MutableList<Array<Any>> = mutableListOf()
+    var delayed = false
+    var i = 0
     for (car in network.listOfCars) {
         val id = car.id
         val status = car.wantsToDrive
-        val delayed = car.isDelayed
+        if (i<=listOfCarsAfterDelayHasBeenApplied.size) {
+            delayed = listOfCarsAfterDelayHasBeenApplied.get(i)
+        }
+        i += 1
         val row: Array<Any> = arrayOf(id, status, delayed)
         carRows.add(row)
     }

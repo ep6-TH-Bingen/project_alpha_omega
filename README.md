@@ -14,7 +14,7 @@ We have to solve the [tasks](https://olat.vcrp.de/auth/RepositoryEntry/167680416
 To start our application first you have to open command prompt or Windows PowerShell. Navigate to the directory the jar-file is in. There you can run the following command:
 
 ```
-java -jar project_alpha_omega-2.0-SNAPSHOT-jar-with-dependencies.jar
+java -jar project_alpha_omega-2.0-jar-with-dependencies.jar
 ```
 Then the application does a simple traffic simulation consisting of cars (which decide whether they drive or don't drive) and a road network with a given capacity. The simulation shows
 for each car, whether the capacity is reached and the cars are delayed or there is enough space for the cars to drive.
