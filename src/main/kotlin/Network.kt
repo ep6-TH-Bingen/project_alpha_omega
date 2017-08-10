@@ -24,31 +24,31 @@ class Network(val capacity: Int, val listOfCars: MutableList<Car>) {
             car.isDelayed = overCapacity
         }
     }
-    fun CarsDevidedByCapacity():Double{
-        val CarsDevidedByCapacity = (listOfCars.size / capacity).toDouble()
-        return CarsDevidedByCapacity
+    fun carsDividedByCapacity():Double{
+        val carsDividedByCapacity = (listOfCars.size / capacity).toDouble()
+        return carsDividedByCapacity
     }
-    fun switchCase(CarsDevidedByCapacity:Double):Double {
+    fun switchCase(carsDividedByCapacity:Double):Double {
         var chanceOfDelay :Double = 0.0
-        if (CarsDevidedByCapacity > 1.5) {
+        if (carsDividedByCapacity > 1.5) {
             chanceOfDelay = 0.9
         }
-        if ((1.25 <= CarsDevidedByCapacity) && (CarsDevidedByCapacity <= 1.5)) {
+        if ((1.25 <= carsDividedByCapacity) && (carsDividedByCapacity <= 1.5)) {
             chanceOfDelay = 0.7
         }
-        if ((1.1 <= CarsDevidedByCapacity) && (CarsDevidedByCapacity <= 1.25)) {
+        if ((1.1 <= carsDividedByCapacity) && (carsDividedByCapacity <= 1.25)) {
             chanceOfDelay = 0.5
         }
-        if ((0.9 <= CarsDevidedByCapacity) && (CarsDevidedByCapacity <= 1.1)) {
+        if ((0.9 <= carsDividedByCapacity) && (carsDividedByCapacity <= 1.1)) {
             chanceOfDelay = 0.3
         }
-        if ((0.7 <= CarsDevidedByCapacity) && (CarsDevidedByCapacity <= 0.9)) {
+        if ((0.7 <= carsDividedByCapacity) && (carsDividedByCapacity <= 0.9)) {
             chanceOfDelay = 0.2
         }
-        if ((0.5 <= CarsDevidedByCapacity) && (CarsDevidedByCapacity <= 0.7)) {
+        if ((0.5 <= carsDividedByCapacity) && (carsDividedByCapacity <= 0.7)) {
             chanceOfDelay = 0.1
         }
-        if (CarsDevidedByCapacity < 0.5) {
+        if (carsDividedByCapacity < 0.5) {
             chanceOfDelay = 0.05
         }
         return chanceOfDelay

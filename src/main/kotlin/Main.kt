@@ -6,15 +6,15 @@ import com.univocity.parsers.csv.CsvWriterSettings
 
 fun main(args: Array<String>) {
     val roadNetwork = readNetworkFromCsv("/cars.csv")
-    var ListOfInterest:MutableList<Boolean> = mutableListOf()
+    var listOfInterest:MutableList<Boolean> = mutableListOf()
     for (car in roadNetwork.listOfCars) {
-        ListOfInterest.add(car.wantsToDrive)
+        listOfInterest.add(car.wantsToDrive)
     }
         roadNetwork.analyzeNetwork()
-    var numberOfCarsInComparisonToCapacity = roadNetwork.CarsDevidedByCapacity()
+    var numberOfCarsInComparisonToCapacity = roadNetwork.carsDividedByCapacity()
     var chanceOfDelay = roadNetwork.switchCase(numberOfCarsInComparisonToCapacity)
-    val ListOfCarsAfterDelayHasBeenApplied = roadNetwork.applyingDelay(ListOfInterest,chanceOfDelay)
-        writeNetworkToCsv(roadNetwork,ListOfCarsAfterDelayHasBeenApplied, "ResultingData.csv")
+    val listOfCarsAfterDelayHasBeenApplied = roadNetwork.applyingDelay(listOfInterest,chanceOfDelay)
+        writeNetworkToCsv(roadNetwork,listOfCarsAfterDelayHasBeenApplied, "ResultingData.csv")
     }
 
 private fun readNetworkFromCsv(fileName: String): Network {
@@ -42,7 +42,7 @@ private fun readNetworkFromCsv(fileName: String): Network {
     return Network(capacity, listOfCars)
 }
 
-private fun writeNetworkToCsv(network: Network,ListOfCarsAfterDelayHasBeenApplied:MutableList<Boolean>, fileName: String) {
+private fun writeNetworkToCsv(network: Network,listOfCarsAfterDelayHasBeenApplied:MutableList<Boolean>, fileName: String) {
     val settings = CsvWriterSettings()
     settings.format.setLineSeparator("\n")
 
