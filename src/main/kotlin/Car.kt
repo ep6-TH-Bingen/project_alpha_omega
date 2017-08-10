@@ -1,4 +1,4 @@
-class Car(val id: Int, val wantsToDrive: Boolean) {
+class Car(val id: Int, var wantsToDrive: Boolean) {
 
     var isDelayed: Boolean = false
 

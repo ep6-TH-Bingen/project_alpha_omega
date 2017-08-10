@@ -11,14 +11,20 @@ class Network(val capacity: Int, val listOfCars: MutableList<Car>) {
     }
 
     fun analyzeNetwork() {
-        val requiredCapacity = this.requiredCapacity()
-        val carsDividedByCapacity = requiredCapacity / capacity.toDouble()
-        val chanceOfDelay = chanceOfDelay(carsDividedByCapacity)
+        val hours = 24
+        for (hour in 1..hours) {
+            val requiredCapacity = this.requiredCapacity()
+            val carsDividedByCapacity = requiredCapacity / capacity.toDouble()
+            val chanceOfDelay = chanceOfDelay(carsDividedByCapacity)
 
-        for (car in listOfCars) {
-            if (car.wantsToDrive) {
-                val delayed = computingDelay(chanceOfDelay)
-                car.isDelayed = delayed
+            for (car in listOfCars) {
+                if (car.wantsToDrive) {
+                    val delayed = computingDelay(chanceOfDelay)
+                    car.isDelayed = delayed
+                }
+                if (car.wantsToDrive && car.isDelayed == true) {
+                    car.wantsToDrive = true
+                }
             }
         }
     }

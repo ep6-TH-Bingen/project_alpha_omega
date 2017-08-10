@@ -3,6 +3,7 @@ import com.univocity.parsers.csv.CsvParser
 import com.univocity.parsers.csv.CsvParserSettings
 import com.univocity.parsers.csv.CsvWriter
 import com.univocity.parsers.csv.CsvWriterSettings
+import java.util.*
 
 fun main(args: Array<String>) {
     val roadNetwork = readNetworkFromCsv("/cars.csv")
@@ -62,12 +63,13 @@ fun scenario(numberOfCars: Int, capacity: Int) {
     * The road network is analyzed and it is printed whether a car is delayed or not
     */
     val listOfCars: MutableList<Car> = mutableListOf()
+    val road = Network(capacity, listOfCars)
+    var wantsToDrive: Boolean
     for (i in 1..numberOfCars) {
-        val newCar = Car(i, i % 2 == 0)
+        wantsToDrive = Random().nextBoolean()
+        val newCar = Car(i, wantsToDrive)
         listOfCars.add(newCar)
     }
-
-    val road = Network(capacity, listOfCars)
     road.analyzeNetwork()
     for (car in road.listOfCars) {
         println("Does car #" + car.id + " want to drive? " + car.wantsToDrive)
