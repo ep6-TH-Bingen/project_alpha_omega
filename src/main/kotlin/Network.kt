@@ -24,6 +24,8 @@ class Network(val capacity: Int, val listOfCars: MutableList<Car>) {
                 }
                 if (car.wantsToDrive && car.isDelayed == true) {
                     car.wantsToDrive = true
+                    car.wantsToDriveAtHour.add(hour)
+                    car.isDelayedAtHour.add(hour)
                 }
             }
         }
