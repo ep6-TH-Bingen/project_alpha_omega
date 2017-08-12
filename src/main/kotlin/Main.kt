@@ -58,23 +58,36 @@ private fun writeNetworkToCsv(network: Network, fileName: String) {
 
 fun scenario(numberOfCars: Int, capacity: Int) {
     /*
-    * Creates a given a number of cars, every other car wants to drive
+    * Creates a given a number of cars
     * A road network is created with the given capacity
-    * The road network is analyzed and it is printed whether a car is delayed or not
+    * Simulating 24 hours and prints for each hour which cars want to drive and which cars are delayed
     */
     val listOfCars: MutableList<Car> = mutableListOf()
     val road = Network(capacity, listOfCars)
-    var wantsToDrive: Boolean
     for (i in 1..numberOfCars) {
-        wantsToDrive = Random().nextBoolean()
-        val newCar = Car(i, wantsToDrive)
+        val newCar = Car(i)
         listOfCars.add(newCar)
+        for (hour in 1..24) {
+            if (Random().nextBoolean()) {
+                newCar.wantsToDriveAtHour.add(hour)
+            }
+        }
     }
     road.analyzeNetwork()
-    for (car in road.listOfCars) {
-        println("Does car #" + car.id + " want to drive? " + car.wantsToDrive)
-        if (car.wantsToDrive == true) {
-            println("Is car #" + car.id + " delayed? " + car.isDelayed)
+    for (hour in 1..24){
+        println("Hour: $hour")
+        var wantToDrive = "  Cars that want to drive: "
+        var delayed =  "  Car that are delayed:    "
+        for (car in listOfCars) {
+            if (car.wantsToDriveAtHour(hour)) {
+                wantToDrive += "${car.id}, "
+            }
+            if (car.isDelayedAtHour(hour)) {
+                delayed += "${car.id}, "
+            }
         }
+        // removes the trailing comma
+        println(wantToDrive.dropLast(2))
+        println(delayed.dropLast(2))
     }
 }
