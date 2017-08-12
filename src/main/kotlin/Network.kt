@@ -18,7 +18,7 @@ class Network(val capacity: Int, val listOfCars: MutableList<Car>) {
             val chanceOfDelay = chanceOfDelay(carsDividedByCapacity)
 
             for (car in listOfCars) {
-                if (car.isDelayedAtHour(hour-1)) {
+                if (car.isDelayedAtHour(hour-1) && !car.wantsToDriveAtHour.contains(hour)) {
                     car.wantsToDriveAtHour.add(hour)
                 }
                 if (car.wantsToDriveAtHour(hour)) {
