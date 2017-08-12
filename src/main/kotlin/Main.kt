@@ -47,14 +47,24 @@ private fun writeNetworkToCsv(network: Network, fileName: String) {
 
     val writer = FileAccess().getWriter(fileName)
     val csvWriter = CsvWriter(writer, settings)
-    csvWriter.writeHeaders("Car-ID", "status", "delayed")
+    csvWriter.writeHeaders("Car-ID", "wantsToDriveAtHour", "delayedAtHour")
 
     val carRows: MutableList<Array<Any>> = mutableListOf()
     for (car in network.listOfCars) {
         val id = car.id
-        val status = car.wantsToDrive
-        val delayed = car.isDelayed
-        val row: Array<Any> = arrayOf(id, status, delayed)
+        //hours a car wants to drive
+        var wantsToDriveAtHour = " "
+        for (hour in car.wantsToDriveAtHour) {
+            wantsToDriveAtHour += "$hour;"
+        }
+        wantsToDriveAtHour = wantsToDriveAtHour.dropLast(1)
+        // hours a car is delayed
+        var delayedAtHour = " "
+        for (hour in car.isDelayedAtHour) {
+            delayedAtHour += "$hour;"
+        }
+        delayedAtHour = delayedAtHour.dropLast(1)
+        val row: Array<Any> = arrayOf(id, wantsToDriveAtHour, delayedAtHour)
         carRows.add(row)
     }
 
