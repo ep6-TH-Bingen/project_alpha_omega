@@ -11,13 +11,27 @@ Our lecturer is [Nicolai Parlog](https://github.com/nicolaiparlog).
 We have to solve the [tasks](https://olat.vcrp.de/auth/RepositoryEntry/1676804160/CourseNode/95999652079122) in the limited period from 30.07.2017 (18:00) to 13.08.2017 (18:00).
 
 ## Application
-To start our application first you have to open command prompt or Windows PowerShell. Navigate to the directory the jar-file is in. There you can run the following command:
+You can download the newest release [here](https://github.com/ep6-TH-Bingen/project_alpha_omega/releases).
+As input you should provide a csv-file (cars.csv) in the resources folder. See the following example for the structure of the file:
+```
+Car-ID, wantsToDriveAtHour
+1, 3
+1, 5
+1, 12
+1, 21
+2, 4
+2, 5
+2, 20
+3, 13
+...
+```
+
+To start our application you need to open command prompt or Windows PowerShell. Navigate to the directory the jar-file is in. Use the following command to run the simulation:
 
 ```
 java -jar project_alpha_omega-2.0-SNAPSHOT-jar-with-dependencies.jar
 ```
-Then the application does a simple traffic simulation consisting of cars (which decide whether they drive or don't drive) and a road network with a given capacity. The simulation shows
-for each car, whether the capacity is reached and the cars are delayed or there is enough space for the cars to drive.
+Then the application simulates the traffic for 24 hours and returns for each car the hours it wanted to drive and whether it was delayed or not. A car that wants to drive e.g. at hour 4 and is delayed keeps the desire to drive until it is fulfilled.
 
 ## Communication
 For communication and code-sharing we use **_GitHub_** and **_Git_**.
