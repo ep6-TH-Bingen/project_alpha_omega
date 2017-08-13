@@ -7,7 +7,7 @@
 
 	<groupId>ep6-TH-Bingen</groupId>
 	<artifactId>project_alpha_omega</artifactId>
-	<version>3.0-SNAPSHOT</version>
+	<version>3.0</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -11,7 +11,7 @@ Our lecturer is [Nicolai Parlog](https://github.com/nicolaiparlog).
 We have to solve the [tasks](https://olat.vcrp.de/auth/RepositoryEntry/1676804160/CourseNode/95999652079122) in the limited period from 30.07.2017 (18:00) to 13.08.2017 (18:00).
 
 ## Application
-You can download the newest release [here](https://github.com/ep6-TH-Bingen/project_alpha_omega/releases).
+You can download the newest release (3.0) [here](https://github.com/ep6-TH-Bingen/project_alpha_omega/releases).
 As input you should provide a csv-file (cars.csv) in the resources folder. See the following example for the structure of the file:
 ```
 Car-ID, wantsToDriveAtHour
