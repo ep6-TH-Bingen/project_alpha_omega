@@ -22,17 +22,22 @@ private fun readNetworkFromCsv(fileName: String): Network {
     val carRows: MutableList<Record> = csvParser.parseAllRecords(reader)
 
     val listOfCars: MutableList<Car> = mutableListOf()
-    for (car in carRows) {
-        val carID = car.values.get(0)
+    val mapOfCarIDs: MutableMap<Int,Car> = mutableMapOf()
+
+    for (carRow in carRows) {
+        val carID = carRow.values.get(0)
         val id = carID.toInt()
-
-        val carStatus = car.values.get(1)
-        val status = carStatus.toBoolean()
-
-        val newCar = Car(id, status)
-        listOfCars.add(newCar)
+        val carHour = carRow.values.get(1)
+        val hour = carHour.toInt()
+        // only creates a new car if carID doesn't exist yet
+        if (!mapOfCarIDs.contains(id)) {
+            val newCar = Car(id,true)
+            listOfCars.add(newCar)
+            mapOfCarIDs.put(id,newCar)
+        }
+        // add the hour to car with this ID
+        mapOfCarIDs.get(id)!!.wantsToDriveAtHour.add(hour)
     }
-
     return Network(capacity, listOfCars)
 }
 
@@ -42,14 +47,24 @@ private fun writeNetworkToCsv(network: Network, fileName: String) {
 
     val writer = FileAccess().getWriter(fileName)
     val csvWriter = CsvWriter(writer, settings)
-    csvWriter.writeHeaders("Car-ID", "status", "delayed")
+    csvWriter.writeHeaders("Car-ID", "wantsToDriveAtHour", "delayedAtHour")
 
     val carRows: MutableList<Array<Any>> = mutableListOf()
     for (car in network.listOfCars) {
         val id = car.id
-        val status = car.wantsToDrive
-        val delayed = car.isDelayed
-        val row: Array<Any> = arrayOf(id, status, delayed)
+        //hours a car wants to drive
+        var wantsToDriveAtHour = " "
+        for (hour in car.wantsToDriveAtHour) {
+            wantsToDriveAtHour += "$hour;"
+        }
+        wantsToDriveAtHour = wantsToDriveAtHour.dropLast(1)
+        // hours a car is delayed
+        var delayedAtHour = " "
+        for (hour in car.isDelayedAtHour) {
+            delayedAtHour += "$hour;"
+        }
+        delayedAtHour = delayedAtHour.dropLast(1)
+        val row: Array<Any> = arrayOf(id, wantsToDriveAtHour, delayedAtHour)
         carRows.add(row)
     }
 
