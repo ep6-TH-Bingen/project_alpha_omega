@@ -29,7 +29,7 @@ Car-ID, wantsToDriveAtHour
 To start our application you need to open command prompt or Windows PowerShell. Navigate to the directory the jar-file is in. Use the following command to run the simulation:
 
 ```
-java -jar project_alpha_omega-2.0-SNAPSHOT-jar-with-dependencies.jar
+java -jar project_alpha_omega-2.0-jar-with-dependencies.jar
 ```
 Then the application simulates the traffic for 24 hours and returns for each car the hours it wanted to drive and whether it was delayed or not. A car that wants to drive e.g. at hour 4 and is delayed keeps the desire to drive until it is fulfilled.
 
